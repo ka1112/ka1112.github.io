@@ -553,7 +553,7 @@ h2 {
 
 .about-osaka {
   position: absolute;
-  right: -4vw;
+  right: 2vw;
   bottom: clamp(120px, 16vw, 230px);
   color: rgba(255, 255, 255, 0.052);
   font-family: var(--font-display);
