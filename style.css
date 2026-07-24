@@ -1237,11 +1237,13 @@ h2 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  html {
     scroll-behavior: auto !important;
-    animation-duration: 1ms !important;
+  }
+
+  *:not(.marquee-track),
+  *:not(.marquee-track)::before,
+  *:not(.marquee-track)::after {
     transition-duration: 1ms !important;
   }
 }
