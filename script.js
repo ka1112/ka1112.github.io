@@ -203,3 +203,26 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll(".section-reveal").forEach((section) => {
   revealObserver.observe(section);
 });
+function updateMarqueeSpeed() {
+  document.querySelectorAll(".marquee-track").forEach((track) => {
+    const moveDistance = track.scrollWidth / 2;
+
+    // 1秒間に動く距離。数値が小さいほど遅い
+    const speed = 28;
+
+    const duration = moveDistance / speed;
+    track.style.animationDuration = `${duration}s`;
+  });
+}
+
+window.addEventListener("load", updateMarqueeSpeed);
+
+let marqueeResizeTimer;
+
+window.addEventListener("resize", () => {
+  window.clearTimeout(marqueeResizeTimer);
+
+  marqueeResizeTimer = window.setTimeout(() => {
+    updateMarqueeSpeed();
+  }, 150);
+});
