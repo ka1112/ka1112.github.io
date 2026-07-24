@@ -1241,9 +1241,9 @@ h2 {
     scroll-behavior: auto !important;
   }
 
-  *:not(.marquee-track),
-  *:not(.marquee-track)::before,
-  *:not(.marquee-track)::after {
+  *:not(.marquee-track):not(.hero-card),
+  *:not(.marquee-track):not(.hero-card)::before,
+  *:not(.marquee-track):not(.hero-card)::after {
     transition-duration: 1ms !important;
   }
 }
