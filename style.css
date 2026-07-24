@@ -1236,18 +1236,6 @@ h2 {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto !important;
-  }
-
-  *:not(.marquee-track):not(.hero-card),
-  *:not(.marquee-track):not(.hero-card)::before,
-  *:not(.marquee-track):not(.hero-card)::after {
-    transition-duration: 1ms !important;
-  }
-}
-
 @media (max-width: 640px) {
   html,
   body {
