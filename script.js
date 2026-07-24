@@ -1,4 +1,4 @@
-﻿const players = {
+const players = {
   p1ng: {
     name: "p1ng",
     role: "FORTNITE DIV",
@@ -202,9 +202,4 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".section-reveal").forEach((section) => {
   revealObserver.observe(section);
-});
-
-document.querySelector(".contact-form")?.addEventListener("submit", (event) => {
-  event.preventDefault();
-  event.currentTarget.reset();
 });
