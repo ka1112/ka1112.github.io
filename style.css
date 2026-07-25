@@ -1215,7 +1215,7 @@ h2 {
     top: 150px;
     right: auto;
     bottom: auto;
-    left: 54%;
+    left: 58%;
     width: max-content;
     font-size: clamp(78px, 24vw, 108px);
     transform: translateX(-50%);
@@ -1390,7 +1390,7 @@ h2 {
     top: 154px;
     right: auto;
     bottom: auto;
-    left: 54%;
+    left: 58%;
     width: max-content;
     font-size: clamp(76px, 23vw, 104px);
     transform: translateX(-50%);
