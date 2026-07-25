@@ -560,16 +560,14 @@ h2 {
 
 .about-osaka {
   position: absolute;
-  right: clamp(20px, 3vw, 60px);
-  bottom: clamp(140px, 15vw, 220px);
-
-  color: rgba(255, 255, 255, 0.05);
+  right: 2vw;
+  bottom: clamp(120px, 16vw, 230px);
+  color: rgba(255, 255, 255, 0.052);
   font-family: var(--font-display);
-  font-size: clamp(100px, 17vw, 250px);
+  font-size: clamp(92px, 18vw, 280px);
   font-weight: 700;
   line-height: 0.8;
   pointer-events: none;
-  user-select: none;
 }
 
 .about-hero-grid {
@@ -1214,19 +1212,14 @@ h2 {
   }
 
   .about-osaka {
-  position: absolute;
-  top: 60px;
-  right: -8vw;
-  bottom: auto;
-
-  color: rgba(255, 255, 255, 0.05);
-  font-family: var(--font-display);
-  font-size: clamp(72px, 24vw, 120px);
-  font-weight: 700;
-  line-height: 0.8;
-  pointer-events: none;
-  user-select: none;
-}
+    top: 132px;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    width: max-content;
+    font-size: clamp(78px, 24vw, 108px);
+    transform: translateX(-50%);
+  }
 
   .about-statement {
     padding-left: 20px;
@@ -1394,11 +1387,14 @@ h2 {
   }
 
   .about-osaka {
-  top: 88px;
-  right: -12vw;
-  bottom: auto;
-  font-size: clamp(72px, 26vw, 120px);
-}
+    top: 136px;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    width: max-content;
+    font-size: clamp(76px, 23vw, 104px);
+    transform: translateX(-50%);
+  }
 
   .about-kicker {
     margin-bottom: 16px;
