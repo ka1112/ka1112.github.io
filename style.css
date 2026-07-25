@@ -1212,10 +1212,10 @@ h2 {
   }
 
   .about-osaka {
-    top: 132px;
+    top: 150px;
     right: auto;
     bottom: auto;
-    left: 50%;
+    left: 54%;
     width: max-content;
     font-size: clamp(78px, 24vw, 108px);
     transform: translateX(-50%);
@@ -1387,10 +1387,10 @@ h2 {
   }
 
   .about-osaka {
-    top: 136px;
+    top: 154px;
     right: auto;
     bottom: auto;
-    left: 50%;
+    left: 54%;
     width: max-content;
     font-size: clamp(76px, 23vw, 104px);
     transform: translateX(-50%);
