@@ -1383,11 +1383,16 @@ h2 {
   }
 
   .about-osaka {
-    top: 88px;
-    right: -12vw;
-    bottom: auto;
-    font-size: clamp(72px, 26vw, 120px);
-  }
+  position: absolute;
+  right: clamp(20px, 4vw, 80px);
+  bottom: clamp(120px, 16vw, 230px);
+  color: rgba(255,255,255,.05);
+  font-family: var(--font-display);
+  font-size: clamp(92px,18vw,280px);
+  font-weight:700;
+  line-height:.8;
+  pointer-events:none;
+}
 
   .about-kicker {
     margin-bottom: 16px;
