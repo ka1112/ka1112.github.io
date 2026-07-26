@@ -6,7 +6,7 @@ const players = {
     socials: { x: "https://x.com/vexgixac2" },
     achievements: [
       "PR(Asia) 166位 (2026年7月24日時点)",
-      "FNCSメジャー2 プレイイン 14位"
+      "FNCSメジャー2 ヒート2 5位"
     ]
   },
   guppa: {
