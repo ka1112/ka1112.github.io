@@ -10,7 +10,7 @@ const players = {
     ]
   },
   guppa: {
-    name: "guppa",
+    name: "guppafv",
     role: "FORTNITE DIV",
     image: "assets/guppa.jpg",
     socials: { x: "https://x.com/BackFxxks" },
