@@ -5,8 +5,8 @@ const players = {
     image: "assets/p1ng.jpg",
     socials: { x: "https://x.com/vexgixac2" },
     achievements: [
-      "PR(Asia) 166位 (2026年7月24日時点)",
-      "FNCSメジャー2 ヒート2 5位"
+      "PR(Asia) 157位 (2026年8月03日時点)",
+      "FNCSメジャー2 グランドファイナル 39位"
     ]
   },
   guppa: {
@@ -15,7 +15,7 @@ const players = {
     image: "assets/guppa.jpg",
     socials: { x: "https://x.com/BackFxxks" },
     achievements: [
-      "PR(Asia) 279位 (2026年7月24日時点)",
+      "PR(Asia) 253位 (2026年8月03日時点)",
       "Reload Elite Series Heats1 13位"
     ]
   },
@@ -25,7 +25,7 @@ const players = {
     image: "assets/makaron.jpg",
     socials: { x: "https://x.com/makaroonv" },
     achievements: [
-      "PR(Asia) 537位 (2026年7月24日時点)",
+      "PR(Asia) 546位 (2026年8月03日時点)",
       "FNCS Div2 21位"
     ]
   },
