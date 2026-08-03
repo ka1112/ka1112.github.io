@@ -1,6 +1,6 @@
 const players = {
   p1ng: {
-    name: "p1ng",
+    name: "joker",
     role: "FORTNITE DIV",
     image: "assets/p1ng.jpg",
     socials: { x: "https://x.com/vexgixac2" },
