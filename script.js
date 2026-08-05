@@ -226,3 +226,49 @@ window.addEventListener("resize", () => {
     updateMarqueeSpeed();
   }, 150);
 });
+
+// Page transition
+(() => {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const transition = document.createElement("div");
+  transition.className = "page-transition";
+  transition.setAttribute("aria-hidden", "true");
+  transition.innerHTML = '<div class="page-transition-mark"><img src="favicon.png" alt=""><span>Weiser Osaka</span></div>';
+  document.body.appendChild(transition);
+
+  const hasSeenIntro = sessionStorage.getItem("weiser-page-intro-seen") === "true";
+  transition.classList.add("is-entering");
+  if (hasSeenIntro) transition.classList.add("is-short");
+
+  window.setTimeout(() => {
+    transition.classList.add("is-done");
+    transition.classList.remove("is-entering", "is-short");
+    sessionStorage.setItem("weiser-page-intro-seen", "true");
+  }, hasSeenIntro ? 820 : 1260);
+
+  window.addEventListener("pageshow", () => {
+    transition.classList.add("is-done");
+    transition.classList.remove("is-leaving");
+  });
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("a[href]");
+    if (!link) return;
+
+    const url = new URL(link.href, window.location.href);
+    const isModifiedClick = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0;
+    const isSamePageHash = url.pathname === window.location.pathname && url.hash;
+    const isExternal = url.origin !== window.location.origin;
+
+    if (isModifiedClick || isExternal || isSamePageHash || link.target || link.hasAttribute("download")) return;
+
+    event.preventDefault();
+    transition.classList.remove("is-done", "is-entering", "is-short");
+    transition.classList.add("is-leaving");
+
+    window.setTimeout(() => {
+      window.location.href = url.href;
+    }, 520);
+  });
+})();
