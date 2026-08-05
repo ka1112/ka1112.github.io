@@ -281,15 +281,17 @@ window.addEventListener("resize", () => {
       vec2 centered = uv - 0.5;
       centered.x *= u_resolution.x / u_resolution.y;
 
-      float sweep = smoothstep(0.012, 0.0, abs(centered.x * 0.65 - centered.y + sin(u_time * 0.18) * 0.12));
-      float side = smoothstep(0.92, 0.12, length(centered + vec2(0.28, -0.18)));
-      float grain = noise(gl_FragCoord.xy * 0.38 + u_time * 9.0);
-      float lines = smoothstep(0.985, 1.0, sin((uv.y + u_time * 0.025) * 190.0));
+      float sweepA = smoothstep(0.018, 0.0, abs(centered.x * 0.72 - centered.y + sin(u_time * 0.2) * 0.14));
+      float sweepB = smoothstep(0.012, 0.0, abs(centered.x * -0.45 - centered.y + cos(u_time * 0.14) * 0.18));
+      float side = smoothstep(0.95, 0.1, length(centered + vec2(0.28, -0.18)));
+      float grain = noise(gl_FragCoord.xy * 0.42 + u_time * 10.0);
+      float scan = smoothstep(0.975, 1.0, sin((uv.y + u_time * 0.028) * 205.0));
+      float ember = smoothstep(0.92, 1.0, noise(uv * vec2(18.0, 7.0) + vec2(u_time * 0.08, -u_time * 0.03)));
 
-      float red = sweep * 0.12 + lines * 0.035;
-      float white = side * 0.045 + grain * 0.018;
-      vec3 color = vec3(white) + vec3(red, 0.0, 0.015);
-      float alpha = clamp(sweep * 0.18 + side * 0.11 + lines * 0.08 + grain * 0.035, 0.0, 0.22);
+      float red = sweepA * 0.24 + sweepB * 0.09 + scan * 0.055 + ember * 0.05;
+      float white = side * 0.08 + grain * 0.026 + sweepB * 0.04;
+      vec3 color = vec3(white) + vec3(red, 0.0, 0.018);
+      float alpha = clamp(sweepA * 0.28 + sweepB * 0.15 + side * 0.15 + scan * 0.1 + ember * 0.08 + grain * 0.045, 0.0, 0.34);
 
       gl_FragColor = vec4(color, alpha);
     }
@@ -340,7 +342,8 @@ window.addEventListener("resize", () => {
   let lastFrame = 0;
 
   function resizeCanvas() {
-    const scale = Math.min(window.devicePixelRatio || 1, 1.5);
+    const isMobile = window.innerWidth <= 640;
+    const scale = Math.min(window.devicePixelRatio || 1, isMobile ? 1.1 : 1.45);
     const width = Math.max(1, Math.floor(window.innerWidth * scale));
     const height = Math.max(1, Math.floor(window.innerHeight * scale));
     if (canvas.width !== width || canvas.height !== height) {
@@ -352,7 +355,8 @@ window.addEventListener("resize", () => {
 
   function render(now) {
     animationId = window.requestAnimationFrame(render);
-    if (now - lastFrame < 33) return;
+    const frameInterval = window.innerWidth <= 640 ? 42 : 33;
+    if (now - lastFrame < frameInterval) return;
     lastFrame = now;
 
     resizeCanvas();
@@ -404,7 +408,7 @@ window.addEventListener("resize", () => {
     transition.classList.add("is-done");
     transition.classList.remove("is-entering", "is-short");
     sessionStorage.setItem("weiser-page-intro-seen", "true");
-  }, hasSeenIntro ? 860 : 1400);
+  }, hasSeenIntro ? 900 : 2500);
 
   window.addEventListener("pageshow", (event) => {
     if (!event.persisted) return;
@@ -434,6 +438,6 @@ window.addEventListener("resize", () => {
 
     window.setTimeout(() => {
       window.location.assign(url.href);
-    }, 540);
+    }, 900);
   }, true);
 })();
