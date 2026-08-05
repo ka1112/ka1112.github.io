@@ -340,6 +340,7 @@ window.addEventListener("resize", () => {
   const timeLocation = gl.getUniformLocation(program, "u_time");
   let animationId = 0;
   let lastFrame = 0;
+  let webglStarted = false;
 
   function resizeCanvas() {
     const isMobile = window.innerWidth <= 640;
@@ -375,40 +376,71 @@ window.addEventListener("resize", () => {
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
       window.cancelAnimationFrame(animationId);
-    } else {
+    } else if (webglStarted) {
       lastFrame = 0;
       animationId = window.requestAnimationFrame(render);
     }
   });
 
+  function startWebgl() {
+    if (webglStarted) return;
+    webglStarted = true;
+    lastFrame = 0;
+    animationId = window.requestAnimationFrame(render);
+  }
+
   resizeCanvas();
-  animationId = window.requestAnimationFrame(render);
+  window.addEventListener("weiser:transition-ready", startWebgl, { once: true });
+  window.setTimeout(startWebgl, 4300);
 })();
 // Page transition
 (() => {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion) return;
 
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+
   const transition = document.querySelector("[data-page-transition]") || (() => {
     const fallback = document.createElement("div");
-    fallback.className = "page-transition is-entering";
+    fallback.className = "page-transition is-preparing";
     fallback.setAttribute("data-page-transition", "");
     fallback.setAttribute("aria-hidden", "true");
-    fallback.innerHTML = '<div class="page-transition-mark"><img src="favicon.png" alt=""><span>Weiser Osaka</span></div>';
+    fallback.innerHTML = '<div class="page-transition-mark"><span>Weiser Osaka</span></div>';
     document.body.prepend(fallback);
     return fallback;
   })();
 
   const hasSeenIntro = sessionStorage.getItem("weiser-page-intro-seen") === "true";
-  if (hasSeenIntro) transition.classList.add("is-short");
-  transition.classList.remove("is-done", "is-leaving");
-  transition.classList.add("is-entering");
+  const enterDuration = hasSeenIntro ? 1200 : 3600;
+  const fontWaitLimit = hasSeenIntro ? 220 : 700;
+  const fontReady = document.fonts && document.fonts.ready
+    ? Promise.race([
+        document.fonts.ready,
+        new Promise((resolve) => window.setTimeout(resolve, fontWaitLimit))
+      ])
+    : Promise.resolve();
 
-  window.setTimeout(() => {
-    transition.classList.add("is-done");
-    transition.classList.remove("is-entering", "is-short");
-    sessionStorage.setItem("weiser-page-intro-seen", "true");
-  }, hasSeenIntro ? 900 : 2500);
+  if (!window.location.hash) {
+    window.scrollTo(0, 0);
+  }
+
+  fontReady.then(() => {
+    if (hasSeenIntro) transition.classList.add("is-short");
+    transition.classList.remove("is-done", "is-leaving", "is-preparing");
+
+    window.requestAnimationFrame(() => {
+      transition.classList.add("is-entering");
+
+      window.setTimeout(() => {
+        transition.classList.add("is-done");
+        transition.classList.remove("is-entering", "is-short");
+        sessionStorage.setItem("weiser-page-intro-seen", "true");
+        window.dispatchEvent(new CustomEvent("weiser:transition-ready"));
+      }, enterDuration);
+    });
+  });
 
   window.addEventListener("pageshow", (event) => {
     if (!event.persisted) return;
@@ -416,7 +448,11 @@ window.addEventListener("resize", () => {
     transition.classList.remove("is-leaving", "is-entering", "is-short");
   });
 
+  let isNavigating = false;
+
   document.addEventListener("click", (event) => {
+    if (isNavigating) return;
+
     const link = event.target.closest("a[href]");
     if (!link) return;
 
@@ -433,11 +469,17 @@ window.addEventListener("resize", () => {
     if (isExternal || isSameDocumentHash) return;
 
     event.preventDefault();
-    transition.classList.remove("is-done", "is-entering", "is-short");
-    transition.classList.add("is-leaving");
+    isNavigating = true;
+    transition.classList.remove("is-leaving", "is-entering", "is-short");
+    transition.classList.add("is-done");
 
-    window.setTimeout(() => {
-      window.location.assign(url.href);
-    }, 900);
+    window.requestAnimationFrame(() => {
+      transition.classList.remove("is-done");
+      transition.classList.add("is-leaving");
+
+      window.setTimeout(() => {
+        window.location.assign(url.href);
+      }, 1200);
+    });
   }, true);
 })();
