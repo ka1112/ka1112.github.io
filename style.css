@@ -1537,3 +1537,155 @@ h2 {
     height: 38px;
   }
 }
+
+/* Page transition */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  color: var(--paper);
+}
+
+.page-transition::before,
+.page-transition::after {
+  position: absolute;
+  inset: 0;
+  background: #030303;
+  content: "";
+  transform: translateY(0);
+  will-change: transform;
+}
+
+.page-transition::before {
+  clip-path: inset(0 0 50% 0);
+}
+
+.page-transition::after {
+  clip-path: inset(50% 0 0 0);
+}
+
+.page-transition-mark {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(8px) scale(0.96);
+}
+
+.page-transition-mark img {
+  width: 74px;
+  height: 74px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  object-fit: cover;
+}
+
+.page-transition-mark span {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.page-transition-mark span::after {
+  position: absolute;
+  right: -18px;
+  bottom: -8px;
+  left: 18px;
+  height: 2px;
+  background: var(--accent);
+  content: "";
+}
+
+.page-transition.is-entering::before {
+  animation: pageIntroTop 1180ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.page-transition.is-entering::after {
+  animation: pageIntroBottom 1180ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.page-transition.is-entering .page-transition-mark {
+  animation: pageIntroMark 900ms ease forwards;
+}
+
+.page-transition.is-entering.is-short::before,
+.page-transition.is-entering.is-short::after {
+  animation-duration: 760ms;
+}
+
+.page-transition.is-entering.is-short .page-transition-mark {
+  animation-duration: 560ms;
+}
+
+.page-transition.is-leaving::before {
+  transform: translateY(-100%);
+  animation: pageLeaveTop 520ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.page-transition.is-leaving::after {
+  transform: translateY(100%);
+  animation: pageLeaveBottom 520ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.page-transition.is-leaving .page-transition-mark {
+  animation: pageLeaveMark 420ms ease forwards;
+}
+
+.page-transition.is-done {
+  display: none;
+}
+
+@keyframes pageIntroTop {
+  0%, 38% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+@keyframes pageIntroBottom {
+  0%, 38% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes pageIntroMark {
+  0% { opacity: 0; transform: translateY(10px) scale(0.96); }
+  24%, 58% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-8px) scale(0.98); }
+}
+
+@keyframes pageLeaveTop {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes pageLeaveBottom {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes pageLeaveMark {
+  0% { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 640px) {
+  .page-transition-mark img {
+    width: 62px;
+    height: 62px;
+  }
+
+  .page-transition-mark span {
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    display: none;
+  }
+}
