@@ -1638,6 +1638,10 @@ h2 {
   animation: pageLeaveMark 420ms ease forwards;
 }
 
+.page-transition.is-leaving {
+  display: grid;
+}
+
 .page-transition.is-done {
   display: none;
 }
