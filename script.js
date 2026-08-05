@@ -229,46 +229,53 @@ window.addEventListener("resize", () => {
 
 // Page transition
 (() => {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion) return;
 
   const transition = document.createElement("div");
-  transition.className = "page-transition";
+  transition.className = "page-transition is-entering";
   transition.setAttribute("aria-hidden", "true");
   transition.innerHTML = '<div class="page-transition-mark"><img src="favicon.png" alt=""><span>Weiser Osaka</span></div>';
   document.body.appendChild(transition);
 
   const hasSeenIntro = sessionStorage.getItem("weiser-page-intro-seen") === "true";
-  transition.classList.add("is-entering");
   if (hasSeenIntro) transition.classList.add("is-short");
 
   window.setTimeout(() => {
     transition.classList.add("is-done");
     transition.classList.remove("is-entering", "is-short");
     sessionStorage.setItem("weiser-page-intro-seen", "true");
-  }, hasSeenIntro ? 820 : 1260);
+  }, hasSeenIntro ? 860 : 1320);
 
-  window.addEventListener("pageshow", () => {
+  window.addEventListener("pageshow", (event) => {
+    if (!event.persisted) return;
     transition.classList.add("is-done");
-    transition.classList.remove("is-leaving");
+    transition.classList.remove("is-leaving", "is-entering", "is-short");
   });
 
   document.addEventListener("click", (event) => {
     const link = event.target.closest("a[href]");
     if (!link) return;
 
-    const url = new URL(link.href, window.location.href);
-    const isModifiedClick = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0;
-    const isSamePageHash = url.pathname === window.location.pathname && url.hash;
-    const isExternal = url.origin !== window.location.origin;
+    const rawHref = link.getAttribute("href");
+    if (!rawHref || rawHref.startsWith("#") || rawHref.startsWith("mailto:") || rawHref.startsWith("tel:")) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+    if (link.target && link.target !== "_self") return;
+    if (link.hasAttribute("download")) return;
 
-    if (isModifiedClick || isExternal || isSamePageHash || link.target || link.hasAttribute("download")) return;
+    const url = new URL(rawHref, window.location.href);
+    const current = new URL(window.location.href);
+    const isExternal = url.origin !== current.origin;
+    const isSameDocumentHash = url.pathname === current.pathname && url.search === current.search && url.hash;
+    if (isExternal || isSameDocumentHash) return;
 
     event.preventDefault();
+
     transition.classList.remove("is-done", "is-entering", "is-short");
     transition.classList.add("is-leaving");
 
     window.setTimeout(() => {
-      window.location.href = url.href;
-    }, 520);
-  });
+      window.location.assign(url.href);
+    }, 540);
+  }, true);
 })();
