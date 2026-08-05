@@ -1545,146 +1545,176 @@ h2 {
   z-index: 9999;
   display: grid;
   place-items: center;
+  overflow: hidden;
+  visibility: visible;
+  opacity: 1;
   pointer-events: none;
   color: var(--paper);
+  contain: strict;
+  transform: translateZ(0);
 }
 
 .page-transition::before,
 .page-transition::after {
   position: absolute;
-  inset: 0;
-  background: #030303;
   content: "";
-  transform: translateY(0);
+  backface-visibility: hidden;
   will-change: transform;
 }
 
 .page-transition::before {
-  clip-path: inset(0 0 50% 0);
+  top: -32vmax;
+  left: -34vmax;
+  z-index: 1;
+  width: 168vmax;
+  height: 168vmax;
+  background: #030303;
+  transform: rotate(-12deg) translate3d(0, 0, 0);
+  transform-origin: center;
 }
 
 .page-transition::after {
-  clip-path: inset(50% 0 0 0);
+  top: calc(50% - 1px);
+  left: -18vw;
+  z-index: 2;
+  width: 136vw;
+  height: 3px;
+  background: var(--accent);
+  opacity: 0;
+  transform: rotate(-12deg) translate3d(-110%, 0, 0);
+  transform-origin: center;
 }
 
 .page-transition-mark {
   position: relative;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  gap: 16px;
+  z-index: 3;
+  display: block;
   opacity: 0;
-  transform: translateY(8px) scale(0.96);
-}
-
-.page-transition-mark img {
-  width: 74px;
-  height: 74px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  object-fit: cover;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  will-change: opacity, transform;
 }
 
 .page-transition-mark span {
   position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: 0;
+  max-width: max-content;
+  border-right: 2px solid var(--accent);
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: clamp(30px, 6vw, 82px);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  line-height: 0.95;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
 .page-transition-mark span::after {
-  position: absolute;
-  right: -18px;
-  bottom: -8px;
-  left: 18px;
-  height: 2px;
-  background: var(--accent);
-  content: "";
+  content: none;
+}
+
+.page-transition.is-preparing .page-transition-mark {
+  opacity: 0;
+}
+
+.page-transition.is-preparing::after {
+  opacity: 0.9;
+  transform: rotate(-12deg) translate3d(-18%, 0, 0);
 }
 
 .page-transition.is-entering::before {
-  animation: pageIntroTop 2500ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation: pageIntroPanel 3600ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
 }
 
 .page-transition.is-entering::after {
-  animation: pageIntroBottom 2500ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation: pageIntroLine 3600ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
 }
 
 .page-transition.is-entering .page-transition-mark {
-  animation: pageIntroMark 2100ms ease forwards;
+  animation: pageIntroMark 3300ms ease forwards;
+}
+
+.page-transition.is-entering .page-transition-mark span {
+  animation: pageTypeText 1800ms steps(12, end) 220ms forwards, pageCaret 760ms steps(1, end) infinite;
 }
 
 .page-transition.is-entering.is-short::before,
 .page-transition.is-entering.is-short::after {
-  animation-duration: 900ms;
+  animation-duration: 1200ms;
 }
 
 .page-transition.is-entering.is-short .page-transition-mark {
-  animation-duration: 760ms;
-}
-
-.page-transition.is-leaving::before {
-  transform: translateY(-100%);
-  animation: pageLeaveTop 900ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
-}
-
-.page-transition.is-leaving::after {
-  transform: translateY(100%);
-  animation: pageLeaveBottom 900ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
-}
-
-.page-transition.is-leaving .page-transition-mark {
-  animation: pageLeaveMark 760ms ease forwards;
-}
-
-.page-transition.is-leaving {
-  display: grid;
-}
-
-.page-transition.is-done {
   display: none;
 }
 
-@keyframes pageIntroTop {
-  0%, 56% { transform: translateY(0); }
-  100% { transform: translateY(-100%); }
+.page-transition.is-leaving::before {
+  transform: rotate(-12deg) translate3d(-118%, 0, 0);
+  animation: pageLeavePanel 1200ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
 }
 
-@keyframes pageIntroBottom {
-  0%, 56% { transform: translateY(0); }
-  100% { transform: translateY(100%); }
+.page-transition.is-leaving::after {
+  transform: rotate(-12deg) translate3d(-118%, 0, 0);
+  animation: pageLeaveLine 1200ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.page-transition.is-leaving .page-transition-mark {
+  display: none;
+}
+
+.page-transition.is-done {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.page-transition.is-done::before {
+  transform: rotate(-12deg) translate3d(118%, 0, 0);
+}
+
+.page-transition.is-done::after {
+  transform: rotate(-12deg) translate3d(118%, 0, 0);
+}
+
+@keyframes pageIntroPanel {
+  0%, 70% { transform: rotate(-12deg) translate3d(0, 0, 0); }
+  100% { transform: rotate(-12deg) translate3d(118%, 0, 0); }
+}
+
+@keyframes pageIntroLine {
+  0%, 16% { transform: rotate(-12deg) translate3d(-118%, 0, 0); opacity: 0; }
+  30%, 70% { transform: rotate(-12deg) translate3d(0, 0, 0); opacity: 1; }
+  100% { transform: rotate(-12deg) translate3d(118%, 0, 0); opacity: 0; }
 }
 
 @keyframes pageIntroMark {
-  0% { opacity: 0; transform: translateY(10px) scale(0.96); }
-  24%, 58% { opacity: 1; transform: translateY(0) scale(1); }
-  100% { opacity: 0; transform: translateY(-8px) scale(0.98); }
+  0%, 76% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
-@keyframes pageLeaveTop {
-  from { transform: translateY(-100%); }
-  to { transform: translateY(0); }
+@keyframes pageTypeText {
+  from { width: 0; }
+  to { width: 12ch; }
 }
 
-@keyframes pageLeaveBottom {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
+@keyframes pageCaret {
+  0%, 48% { border-color: var(--accent); }
+  49%, 100% { border-color: transparent; }
 }
 
-@keyframes pageLeaveMark {
-  0% { opacity: 0; transform: translateY(8px) scale(0.96); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+@keyframes pageLeavePanel {
+  from { transform: rotate(-12deg) translate3d(-118%, 0, 0); }
+  to { transform: rotate(-12deg) translate3d(0, 0, 0); }
+}
+
+@keyframes pageLeaveLine {
+  0% { transform: rotate(-12deg) translate3d(-118%, 0, 0); opacity: 1; }
+  46%, 100% { transform: rotate(-12deg) translate3d(0, 0, 0); opacity: 1; }
 }
 
 @media (max-width: 640px) {
-  .page-transition-mark img {
-    width: 62px;
-    height: 62px;
-  }
-
   .page-transition-mark span {
-    font-size: 12px;
+    font-size: 34px;
   }
 }
 
