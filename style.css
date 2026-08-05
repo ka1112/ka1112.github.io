@@ -1604,38 +1604,38 @@ h2 {
 }
 
 .page-transition.is-entering::before {
-  animation: pageIntroTop 1180ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation: pageIntroTop 2500ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
 }
 
 .page-transition.is-entering::after {
-  animation: pageIntroBottom 1180ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation: pageIntroBottom 2500ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
 }
 
 .page-transition.is-entering .page-transition-mark {
-  animation: pageIntroMark 900ms ease forwards;
+  animation: pageIntroMark 2100ms ease forwards;
 }
 
 .page-transition.is-entering.is-short::before,
 .page-transition.is-entering.is-short::after {
-  animation-duration: 760ms;
+  animation-duration: 900ms;
 }
 
 .page-transition.is-entering.is-short .page-transition-mark {
-  animation-duration: 560ms;
+  animation-duration: 760ms;
 }
 
 .page-transition.is-leaving::before {
   transform: translateY(-100%);
-  animation: pageLeaveTop 520ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation: pageLeaveTop 900ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
 }
 
 .page-transition.is-leaving::after {
   transform: translateY(100%);
-  animation: pageLeaveBottom 520ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  animation: pageLeaveBottom 900ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
 }
 
 .page-transition.is-leaving .page-transition-mark {
-  animation: pageLeaveMark 420ms ease forwards;
+  animation: pageLeaveMark 760ms ease forwards;
 }
 
 .page-transition.is-leaving {
@@ -1647,12 +1647,12 @@ h2 {
 }
 
 @keyframes pageIntroTop {
-  0%, 38% { transform: translateY(0); }
+  0%, 56% { transform: translateY(0); }
   100% { transform: translateY(-100%); }
 }
 
 @keyframes pageIntroBottom {
-  0%, 38% { transform: translateY(0); }
+  0%, 56% { transform: translateY(0); }
   100% { transform: translateY(100%); }
 }
 
@@ -1701,7 +1701,7 @@ h2 {
   z-index: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.34;
+  opacity: 0.58;
   pointer-events: none;
 }
 
@@ -1724,7 +1724,7 @@ h2 {
 
 @media (max-width: 640px) {
   .webgl-field {
-    opacity: 0.26;
+    opacity: 0.38;
   }
 }
 
