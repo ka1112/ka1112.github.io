@@ -1693,3 +1693,43 @@ h2 {
     display: none;
   }
 }
+
+/* Subtle WebGL atmosphere */
+.webgl-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.34;
+  pointer-events: none;
+}
+
+.site-header,
+.page-main,
+.marquee,
+.site-footer {
+  position: relative;
+}
+
+.site-header {
+  z-index: 50;
+}
+
+.page-main,
+.marquee,
+.site-footer {
+  z-index: 1;
+}
+
+@media (max-width: 640px) {
+  .webgl-field {
+    opacity: 0.26;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .webgl-field {
+    display: none;
+  }
+}
