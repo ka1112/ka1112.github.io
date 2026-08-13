@@ -1638,7 +1638,7 @@ h2 {
   display: inline-block;
   overflow: hidden;
   width: 0;
-  max-width: min(13.5ch, 86vw);
+  max-width: min(15ch, 90vw);
   border-right: 2px solid var(--accent);
   font-family: var(--font-display);
   font-size: clamp(30px, 6vw, 82px);
@@ -1675,7 +1675,7 @@ h2 {
 }
 
 .page-transition.is-entering .page-transition-mark span {
-  animation: pageTypeText 1800ms steps(12, end) 220ms forwards, pageCaret 760ms steps(1, end) infinite;
+  animation: pageTypeText 1800ms steps(13, end) 220ms forwards, pageCaret 760ms steps(1, end) infinite;
 }
 
 .page-transition.is-entering.is-short::before,
@@ -1732,7 +1732,7 @@ h2 {
 
 @keyframes pageTypeText {
   from { width: 0; }
-  to { width: min(13.5ch, 86vw); }
+  to { width: min(15ch, 90vw); }
 }
 
 @keyframes pageCaret {
@@ -1752,8 +1752,8 @@ h2 {
 
 @media (max-width: 640px) {
   .page-transition-mark span {
-    max-width: 88vw;
-    font-size: clamp(28px, 9vw, 34px);
+    max-width: 92vw;
+    font-size: clamp(26px, 8.4vw, 34px);
   }
 }
 
