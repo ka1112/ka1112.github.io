@@ -1638,7 +1638,7 @@ h2 {
   display: inline-block;
   overflow: hidden;
   width: 0;
-  max-width: min(15ch, 90vw);
+  max-width: min(14.1ch, 88vw);
   border-right: 2px solid var(--accent);
   font-family: var(--font-display);
   font-size: clamp(30px, 6vw, 82px);
@@ -1732,7 +1732,7 @@ h2 {
 
 @keyframes pageTypeText {
   from { width: 0; }
-  to { width: min(15ch, 90vw); }
+  to { width: min(14.1ch, 88vw); }
 }
 
 @keyframes pageCaret {
@@ -1752,7 +1752,7 @@ h2 {
 
 @media (max-width: 640px) {
   .page-transition-mark span {
-    max-width: 92vw;
+    max-width: 90vw;
     font-size: clamp(26px, 8.4vw, 34px);
   }
 }
