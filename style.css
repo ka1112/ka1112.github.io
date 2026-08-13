@@ -1638,7 +1638,7 @@ h2 {
   display: inline-block;
   overflow: hidden;
   width: 0;
-  max-width: max-content;
+  max-width: min(13.5ch, 86vw);
   border-right: 2px solid var(--accent);
   font-family: var(--font-display);
   font-size: clamp(30px, 6vw, 82px);
@@ -1732,7 +1732,7 @@ h2 {
 
 @keyframes pageTypeText {
   from { width: 0; }
-  to { width: 12ch; }
+  to { width: min(13.5ch, 86vw); }
 }
 
 @keyframes pageCaret {
@@ -1752,7 +1752,8 @@ h2 {
 
 @media (max-width: 640px) {
   .page-transition-mark span {
-    font-size: 34px;
+    max-width: 88vw;
+    font-size: clamp(28px, 9vw, 34px);
   }
 }
 
