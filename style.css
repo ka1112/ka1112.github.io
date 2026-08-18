@@ -86,7 +86,7 @@ textarea {
 .main-nav {
   display: flex;
   justify-content: flex-end;
-  gap: clamp(18px, 3vw, 38px);
+  gap: clamp(12px, 2vw, 30px);
   font-size: 12px;
   font-weight: 800;
 }
@@ -755,6 +755,114 @@ h2 {
 .sponsor-grid a:hover {
   background: var(--paper);
   color: var(--ink);
+}
+
+.scrim {
+  position: relative;
+  min-height: calc(100vh - 80px);
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: #030303;
+}
+
+.scrim-bg {
+  position: absolute;
+  right: clamp(22px, 6vw, 96px);
+  bottom: clamp(40px, 8vw, 110px);
+  color: rgba(255, 212, 0, 0.07);
+  font-family: var(--font-display);
+  font-size: clamp(96px, 17vw, 270px);
+  font-weight: 900;
+  line-height: 0.78;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+
+.scrim-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1040px;
+  padding-top: clamp(70px, 8vw, 130px);
+}
+
+.scrim h1 {
+  max-width: 980px;
+  margin: 22px 0 34px;
+  font-family: var(--font-display);
+  font-size: clamp(52px, 8.6vw, 122px);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+}
+
+.scrim-lead {
+  max-width: 880px;
+  margin: 0;
+  color: var(--paper);
+  font-size: clamp(20px, 2.4vw, 34px);
+  font-weight: 700;
+  line-height: 1.75;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.scrim-statement {
+  display: grid;
+  gap: 20px;
+  max-width: 760px;
+  margin-top: clamp(42px, 6vw, 76px);
+  padding-left: clamp(22px, 3vw, 40px);
+  border-left: 2px solid var(--accent);
+}
+
+.scrim-statement p {
+  margin: 0;
+  color: #d8d8d2;
+  font-size: clamp(16px, 1.55vw, 22px);
+  line-height: 1.9;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.scrim-info {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 980px;
+  margin-top: clamp(38px, 5vw, 70px);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.scrim-info div {
+  min-height: 150px;
+  padding: clamp(22px, 3vw, 32px);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.scrim-info span {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.scrim-info p {
+  margin: 0;
+  color: var(--paper);
+  font-size: clamp(17px, 1.65vw, 24px);
+  font-weight: 700;
+  line-height: 1.55;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  .scrim-info {
+    grid-template-columns: 1fr;
+  }
 }
 
 .news {
