@@ -2682,6 +2682,10 @@ body::before,
   animation-duration: 2800ms;
 }
 
+.page-transition.is-entering::after {
+  display: none;
+}
+
 .page-transition.is-entering .page-transition-mark {
   display: block;
   animation: introEmblem 2800ms ease forwards;
