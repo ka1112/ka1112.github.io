@@ -5,18 +5,18 @@ const players = {
     image: "assets/p1ng.jpg",
     socials: { x: "https://x.com/vexgixac2" },
     achievements: [
-      "PR(Asia) 157位 (2026年8月03日時点)",
+      "PR(Asia) 157位 (2026年10月3日更新)",
       "FNCSメジャー2 グランドファイナル 39位"
     ]
   },
   guppa: {
     name: "guppafv",
     role: "FORTNITE DIV",
-    image: "assets/guppa.jpg",
+    image: "assets/guppa_new.jpg",
     socials: { x: "https://x.com/BackFxxks" },
     achievements: [
-      "PR(Asia) 253位 (2026年8月03日時点)",
-      "Reload Elite Series Heats1 13位"
+      "PR(Asia) 235位 (2026年10月3日更新)",
+      "ソロ ビクトリーカップ 決勝 6位"
     ]
   },
   makaron: {
@@ -25,7 +25,7 @@ const players = {
     image: "assets/makaron.jpg",
     socials: { x: "https://x.com/makaroonv" },
     achievements: [
-      "PR(Asia) 546位 (2026年8月03日時点)",
+      "PR(Asia) 563位 (2026年10月3日更新)",
       "FNCS Div2 21位"
     ]
   },
