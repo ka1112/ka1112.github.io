@@ -3,7 +3,7 @@ const players = {
     name: "joker",
     role: "FORTNITE DIV",
     image: "assets/p1ng.jpg",
-    socials: { x: "https://x.com/vexgixac2" },
+    socials: { x: "https://x.com/ag1yei3ahp" },
     achievements: [
       "PR(Asia) 157位 (2026年10月3日更新)",
       "FNCSメジャー2 グランドファイナル 39位"
@@ -13,7 +13,10 @@ const players = {
     name: "guppafv",
     role: "FORTNITE DIV",
     image: "assets/guppa_new.jpg",
-    socials: { x: "https://x.com/BackFxxks" },
+    socials: {
+      x: "https://x.com/BackFxxks",
+      youtube: "https://www.youtube.com/@guppafv"
+    },
     achievements: [
       "PR(Asia) 235位 (2026年10月3日更新)",
       "ソロ ビクトリーカップ 決勝 6位"
