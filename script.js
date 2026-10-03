@@ -416,8 +416,8 @@ window.addEventListener("resize", () => {
   })();
 
   const hasSeenIntro = sessionStorage.getItem("weiser-page-intro-seen") === "true";
-  const enterDuration = hasSeenIntro ? 1200 : 3600;
-  const fontWaitLimit = hasSeenIntro ? 220 : 700;
+  const enterDuration = 650;
+  const fontWaitLimit = 120;
   const fontReady = document.fonts && document.fonts.ready
     ? Promise.race([
         document.fonts.ready,
@@ -482,7 +482,7 @@ window.addEventListener("resize", () => {
 
       window.setTimeout(() => {
         window.location.assign(url.href);
-      }, 1200);
+      }, 550);
     });
   }, true);
 })();
