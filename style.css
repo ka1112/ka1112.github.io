@@ -2643,3 +2643,77 @@ body::before,
     font-size: min(10.6vw, 45px);
   }
 }
+
+/* First-visit emblem loader */
+.page-transition-mark {
+  width: min(390px, 78vw);
+  text-align: center;
+}
+
+.page-transition-mark::before {
+  display: block;
+  width: min(300px, 64vw);
+  aspect-ratio: 1;
+  margin: 0 auto 28px;
+  border: 1px solid rgba(230, 181, 74, 0.28);
+  background: url("favicon.png") center / cover no-repeat;
+  box-shadow: 0 0 80px rgba(230, 181, 74, 0.18);
+  content: "";
+}
+
+.page-transition-mark::after {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+  box-shadow: 0 0 16px rgba(230, 181, 74, 0.55);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.page-transition-mark span {
+  display: none;
+}
+
+.page-transition.is-entering::before,
+.page-transition.is-entering::after {
+  animation-duration: 2800ms;
+}
+
+.page-transition.is-entering .page-transition-mark {
+  display: block;
+  animation: introEmblem 2800ms ease forwards;
+}
+
+.page-transition.is-entering .page-transition-mark::after {
+  animation: introProgress 2100ms cubic-bezier(0.22, 1, 0.36, 1) 280ms forwards;
+}
+
+.page-transition.is-entering.is-short::before,
+.page-transition.is-entering.is-short::after {
+  animation-duration: 650ms;
+}
+
+.page-transition.is-entering.is-short .page-transition-mark {
+  display: none;
+}
+
+@keyframes introEmblem {
+  0% { opacity: 0; transform: scale(0.92); }
+  18%, 72% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.035); }
+}
+
+@keyframes introProgress {
+  0% { opacity: 0.45; transform: scaleX(0); }
+  100% { opacity: 1; transform: scaleX(1); }
+}
+
+@media (max-width: 640px) {
+  .page-transition-mark::before {
+    width: min(260px, 68vw);
+    margin-bottom: 22px;
+  }
+}

@@ -416,8 +416,8 @@ window.addEventListener("resize", () => {
   })();
 
   const hasSeenIntro = sessionStorage.getItem("weiser-page-intro-seen") === "true";
-  const enterDuration = 650;
-  const fontWaitLimit = 120;
+  const enterDuration = hasSeenIntro ? 650 : 2800;
+  const fontWaitLimit = hasSeenIntro ? 120 : 400;
   const fontReady = document.fonts && document.fonts.ready
     ? Promise.race([
         document.fonts.ready,
